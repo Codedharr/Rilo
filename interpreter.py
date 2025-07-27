@@ -6,9 +6,9 @@ from robot import Robot
 from errors import RiloError
 
 class Interpreter:
-    def __init__(self, filepath):
+    def __init__(self, filepath, visualizer=None):
         self.filepath = filepath
-        self.robot = Robot()
+        self.robot = Robot(visualizer)
         self.errors = []
 
     def run(self):
@@ -21,9 +21,11 @@ class Interpreter:
                     # 1) Léxico
                     tokens = lex(line, i)
                     print(f"Línea {i} tokens:", tokens)
+
                     # 2) Sintaxis
                     ast = parse(tokens, i)
                     print(f"Línea {i} AST:", ast)
+
                     # 3) Semántica / Ejecución
                     typ = ast.type
                     if typ == 'START':
@@ -38,13 +40,12 @@ class Interpreter:
                         self.robot.run(ast.value, i)
                     elif typ == 'SOUND':
                         self.robot.sound(ast.value, i)
+
                 except RiloError as e:
                     print(">>", e)
-                    self.errors.append(e)
-        # Resumen de errores
-        if self.errors:
-            print("\n=== ERRORES DETECTADOS ===")
-            for err in self.errors:
-                print(err)
-        else:
-            print("\nNo se detectaron errores.")
+                    # Detenemos la ejecución al primer error:
+                    print("\nEjecución interrumpida debido a un error.")
+                    break
+            else:
+                # Este else va con el for: se ejecuta sólo si no hubo break
+                print("\nNo se detectaron errores.")

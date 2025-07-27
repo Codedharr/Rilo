@@ -1,0 +1,26 @@
+## Prueba 01
+start()
+run 3
+turn left
+move backward 2
+sound "Hello, Rilo!"
+run 2
+turn right
+move forward 4
+stop()
+
+## Prueba 02
+move forward 5            
+start()
+move sideways 3           
+turn both                 
+sound beep           
+stop()
+
+
+#Prueba 03
+start()
+move forward 5
+turn right
+move forward 5
+stop()

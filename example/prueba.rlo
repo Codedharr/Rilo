@@ -1,9 +1,6 @@
+move forward 5            
 start()
-move forward 5
-turn rihtg
-move forward 5
-sound "beep"
-run 3
-turn left
-move backward 2
+move sideways 3           
+turn both                 
+sound beep           
 stop()

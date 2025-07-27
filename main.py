@@ -1,5 +1,10 @@
 # main.py
+
+from visualizer import RiloVisualizer
+from interpreter import Interpreter
+
 if __name__ == '__main__':
-    print("== Ejecutando Rilo ==")
-    from interpreter import Interpreter
-    Interpreter('example/prueba.rlo').run()
+    vis = RiloVisualizer()
+    interp = Interpreter('example/prueba.rlo', visualizer=vis)
+    interp.run()
+    vis.close()
